@@ -6,7 +6,7 @@
             <div class="flex items-center justify-center flex-col mb-4">
                 <input class="bg-white px-4 py-2 rounded-xl mb-2" type="email" name="email" placeholder="Email..." />
                 <input class="bg-white px-4 py-2 rounded-xl mb-2" type="password" name="password" placeholder="Password..." />
-                <input class="bg-white px-4 py-2 rounded-xl" type="password" name="confirm_password" placeholder="Confirm password..." />
+                <input class="bg-white px-4 py-2 rounded-xl" type="password" name="password_confirmation" placeholder="Confirm password..." />
             </div>
             <button class="bg-blue-200 px-4 py-2 rounded-xl hover:bg-blue-300 transition duration-200 ease-in-out hover:cursor-pointer" type="submit">Register</button>
         </form>

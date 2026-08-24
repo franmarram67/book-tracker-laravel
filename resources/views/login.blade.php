@@ -1,10 +1,13 @@
 <x-base>
-    <div>
-        <form>
+    <div class="flex justify-center items-center h-full">
+        <form class="w-auto h-auto bg-blue-100 rounded-xl flex items-center justify-between flex-col p-4" method="POST" action="/login">
             @csrf
-            <h1>Login</h1>
-            <input type="text" name="username" />
-            <input type="password" name="password" />
+            <h1 class="font-semibold text-2xl mb-4">Sign In</h1>
+            <div class="flex items-center justify-center flex-col mb-4">
+                <input class="bg-white px-4 py-2 rounded-xl mb-2" type="email" name="email" placeholder="Email..." />
+                <input class="bg-white px-4 py-2 rounded-xl mb-2" type="password" name="password" placeholder="Password..." />
+            </div>
+            <button class="bg-blue-200 px-4 py-2 rounded-xl hover:bg-blue-300 transition duration-200 ease-in-out hover:cursor-pointer" type="submit">Log In</button>
         </form>
     </div>
 </x-base>

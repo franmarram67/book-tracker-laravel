@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,3 +17,7 @@ Route::get('/register', function () {
 })->name('register');
 
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::resource('books', BookController::class);
