@@ -16,7 +16,7 @@
                 @error('image')
                     <div class="text-red-500">{{ $message }}</div>
                 @enderror
-                <button class="rounded-lg px-4 py-2 mr-2 bg-blue-100 hover:bg-blue-200 transition duration-200 ease-in-out w-full" type="submit">Create</button>
+                <button class="rounded-lg px-4 py-2 mr-2 bg-blue-100 hover:bg-blue-200 transition duration-200 ease-in-out w-full hover:cursor-pointer" type="submit">Create</button>
             </div>
         </form>
     </div>

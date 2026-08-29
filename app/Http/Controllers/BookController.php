@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -13,7 +14,17 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        if (!Auth::check()) {
+            return view('welcome', [
+                'books' => []
+            ]);
+        }
+
+        $books = Auth::user()->books;
+
+        return view('welcome', [
+            'books' => $books
+        ]);
     }
 
     /**
@@ -29,7 +40,16 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        dd($request);
+        $path = $request->file('image')->store('books/images', 'public');
+        
+        $book = Book::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'image_path' => $path,
+            'user_id' => Auth::user()->id,
+        ]);
+        
+        return redirect('/');
     }
 
     /**
