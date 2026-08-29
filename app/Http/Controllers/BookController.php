@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -57,7 +58,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view('books.show', ['book' => $book]);
     }
 
     /**
@@ -65,7 +66,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('books.edit', ['book' => $book]);
     }
 
     /**
@@ -73,7 +74,20 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        if (isset($request->image) && !empty($request->image)) {
+            if (isset($book->image_path) && !empty($book->image_path)) {
+                Storage::disk('public')->delete($book->image_path);
+            }
+            $path = $request->file('image')->store('books/images', 'public');
+            $book->image_path = $path;
+        }
+
+        $book->title = $request->title;
+        $book->description = $request->description;
+
+        $book->save();
+
+        return redirect(route('books.show', ['book' => $book]));
     }
 
     /**
@@ -81,6 +95,12 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        if (isset($book->image_path) && !empty($book->image_path)) {
+            Storage::disk('public')->delete($book->image_path);
+        }
+
+        $book->delete();
+
+        return redirect('/');
     }
 }
